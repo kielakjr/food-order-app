@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import Meal from './Meal'
 
 const Meals = () => {
   const [isFetching, setIsFetching] = useState(false);
@@ -30,13 +31,9 @@ const Meals = () => {
       {isFetching && <p>Loading meals...</p>}
       {error && <p>{error}</p>}
       {!isFetching && !error && (
-        <ul>
+        <ul id="meals">
           {meals.map((meal) => (
-            <li key={meal.id}>
-              <h2>{meal.name}</h2>
-              <p>{meal.description}</p>
-              <p>${meal.price}</p>
-            </li>
+            <Meal key={meal.id} name={meal.name} price={meal.price} description={meal.description} image={meal.image} />
           ))}
         </ul>
       )}
