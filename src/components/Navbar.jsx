@@ -9,7 +9,7 @@ const Navbar = () => {
         <h1>ReactFood</h1>
       </div>
       <nav>
-        <button>Cart</button>
+        <button className="text-button">Cart</button>
       </nav>
     </header>
   )
