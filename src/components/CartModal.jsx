@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { CartContext } from '../store/cart-context'
 
 const CartModal = ({ ref }) => {
-  const { items, addItem, removeItem } = useContext(CartContext);
+  const { items, totalAmount, addItem, removeItem } = useContext(CartContext);
   const dialog = useRef();
 
   useImperativeHandle(ref, () => {
@@ -34,6 +34,9 @@ const CartModal = ({ ref }) => {
           </li>
         ))}
       </ul>
+      <div className="cart-total">
+        <h3>${totalAmount}</h3>
+      </div>
     </dialog>,
     document.getElementById('modal')
   )

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext({
   items: [],
@@ -9,6 +9,15 @@ export const CartContext = createContext({
 
 const CartProvider = (props) => {
   const [items, setItems] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  const updateAmount = () => {
+    setTotalAmount(items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2));
+  }
+
+  useEffect(() => {
+    updateAmount();
+  }, [items]);
 
 
   const addItemToCartHandler = (meal) => {
@@ -39,7 +48,7 @@ const CartProvider = (props) => {
 
   const cartContext = {
     items: items,
-    totalAmount: 0,
+    totalAmount: totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
   };
