@@ -33,7 +33,7 @@ const Meals = () => {
       {!isFetching && !error && (
         <ul id="meals">
           {meals.map((meal) => (
-            <Meal key={meal.id} name={meal.name} price={meal.price} description={meal.description} image={meal.image} />
+            <Meal key={meal.id} id={meal.id} name={meal.name} price={meal.price} description={meal.description} image={meal.image} />
           ))}
         </ul>
       )}

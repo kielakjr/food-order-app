@@ -1,4 +1,3 @@
-import React from 'react'
 import logo from '../assets/logo.jpg'
 import { CartContext } from '../store/cart-context'
 import { useContext, useRef } from 'react';

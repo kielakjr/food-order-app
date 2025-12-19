@@ -11,12 +11,30 @@ const CartProvider = (props) => {
   const [items, setItems] = useState([]);
 
 
-  const addItemToCartHandler = (item) => {
-    setItems((prevItems) => [...prevItems, item]);
+  const addItemToCartHandler = (meal) => {
+    const item = { ...meal, quantity: 1 };
+    setItems((prevItems) => {
+      if (prevItems.find((it) => it.id === item.id)) {
+        return prevItems.map((it) =>
+          it.id === item.id ? { ...it, quantity: it.quantity + 1 } : it
+        );
+      } else {
+        return [...prevItems, item];
+      }
+    });
   };
 
   const removeItemFromCartHandler = (id) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    setItems((prevItems) => {
+      const existingItem = prevItems.find((it) => it.id === id);
+      if (existingItem.quantity === 1) {
+        return prevItems.filter((it) => it.id !== id);
+      } else {
+        return prevItems.map((it) =>
+          it.id === id ? { ...it, quantity: it.quantity - 1 } : it
+        );
+      }
+    });
   };
 
   const cartContext = {
