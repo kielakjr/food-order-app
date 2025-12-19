@@ -1,8 +1,11 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import { useImperativeHandle, useRef } from 'react'
+import { useImperativeHandle, useRef, useContext } from 'react'
+import { CartContext } from '../store/cart-context'
+import CheckoutForm from './CheckoutForm'
 
 const CheckoutModal = ({ ref }) => {
+  const { totalAmount } = useContext(CartContext);
   const dialog = useRef();
 
   useImperativeHandle(ref, () => {
@@ -17,8 +20,8 @@ const CheckoutModal = ({ ref }) => {
     }, []);
 
   return createPortal(
-    <dialog ref={dialog} className="checkout modal">
-      <h2>Checkout</h2>
+    <dialog ref={dialog} className="modal">
+     <CheckoutForm totalAmount={totalAmount} onClose={() => dialog.current.close()} />
     </dialog>,
     document.getElementById('modal')
   )
